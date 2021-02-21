@@ -1,4 +1,5 @@
 using MechanicHelper.Models;
+using MechanicHelper.Repos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,9 @@ namespace MechanicHelper
                 Configuration.GetConnectionString("MechanicDbContext")));
 
             services.AddRazorPages();
+
+            services.AddScoped<ICarsRepository, SQLCarsRepository>();
+            services.AddScoped<IRepairServiceRepository, SQLRepairServiceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

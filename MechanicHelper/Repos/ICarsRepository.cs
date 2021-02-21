@@ -8,7 +8,7 @@ namespace MechanicHelper.Repos
 {
     public interface ICarsRepository
     {
-        Car GetCar(int id);
+        Car GetCar(string id);
 
         IEnumerable<Car> GetAllCars();
 
@@ -16,6 +16,6 @@ namespace MechanicHelper.Repos
 
         Car Update(Car carChanges);
 
-        Car Delete(int id);
+        Car Delete(string id);
     }
 }

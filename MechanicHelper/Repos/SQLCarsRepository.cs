@@ -22,7 +22,7 @@ namespace MechanicHelper.Repos
             return car;
         }
 
-        public Car Delete(int id)
+        public Car Delete(string id)
         {
             Car car = context.Cars.Find(id);
 
@@ -40,7 +40,7 @@ namespace MechanicHelper.Repos
             return context.Cars;
         }
 
-        public Car GetCar(int id)
+        public Car GetCar(string id)
         {
             return context.Cars.Find(id);
         }

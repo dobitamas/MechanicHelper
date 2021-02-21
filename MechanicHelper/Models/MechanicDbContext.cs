@@ -9,6 +9,7 @@ namespace MechanicHelper.Models
     public class MechanicDbContext : DbContext
     {
         public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<RepairService> RepairServices { get; set; }
 
         public MechanicDbContext(DbContextOptions<MechanicDbContext> options)
             : base(options)
@@ -22,6 +23,9 @@ namespace MechanicHelper.Models
             builder.Entity<Car>()
                 .HasMany(c => c.Repairs)
                 .WithOne(r => r.ServicedOn);
+
+            builder.Entity<RepairService>()
+                .HasOne(c => c.ServicedOn);
         }
     }
 }
