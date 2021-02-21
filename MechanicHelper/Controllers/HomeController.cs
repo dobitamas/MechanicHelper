@@ -1,4 +1,5 @@
 ﻿using MechanicHelper.Models;
+using MechanicHelper.Repos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,14 +14,18 @@ namespace MechanicHelper.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ICarsRepository _repo;
+
+        public HomeController(ILogger<HomeController> logger, ICarsRepository repo)
         {
             _logger = logger;
+            _repo = repo;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Car> Cars = _repo.GetAllCars();
+            return View(Cars);
         }
 
         public IActionResult Privacy()

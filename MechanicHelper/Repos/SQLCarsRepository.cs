@@ -35,7 +35,7 @@ namespace MechanicHelper.Repos
             return car;
         }
 
-        public IEnumerable<Car> GetAllCars()
+        public IQueryable<Car> GetAllCars()
         {
             return context.Cars;
         }
