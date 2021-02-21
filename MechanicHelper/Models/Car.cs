@@ -27,7 +27,7 @@ namespace MechanicHelper.Models
 
         public ICollection<RepairService> Repairs { get; set; }
 
-        public List<string> Problems { get; set; }
+        public ICollection<string> Problems { get; set; }
 
         public Car()
         {

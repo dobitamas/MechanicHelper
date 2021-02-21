@@ -10,7 +10,7 @@ namespace MechanicHelper.Repos
     {
         Car GetCar(string id);
 
-        IEnumerable<Car> GetAllCars();
+        IQueryable<Car> GetAllCars();
 
         Car Add(Car car);
 
