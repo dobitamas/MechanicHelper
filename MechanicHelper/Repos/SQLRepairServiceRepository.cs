@@ -22,7 +22,7 @@ namespace MechanicHelper.Repos
             return service;
         }
 
-        public RepairService Delete(string id)
+        public RepairService Delete(Guid id)
         {
             RepairService repairService = context.RepairServices.Find(id);
 
@@ -40,7 +40,7 @@ namespace MechanicHelper.Repos
             return context.RepairServices;
         }
 
-        public RepairService GetRepairService(string id)
+        public RepairService GetRepairService(Guid id)
         {
             return context.RepairServices.Find(id);
         }

@@ -8,7 +8,7 @@ namespace MechanicHelper.Repos
 {
     public interface IRepairServiceRepository
     {
-        RepairService GetRepairService(string id);
+        RepairService GetRepairService(Guid id);
 
         IEnumerable<RepairService> GetAllServices();
 
@@ -16,6 +16,6 @@ namespace MechanicHelper.Repos
 
         RepairService Update(RepairService repairServiceChanges);
 
-        RepairService Delete(string id);
+        RepairService Delete(Guid id);
     }
 }

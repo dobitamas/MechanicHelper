@@ -21,10 +21,9 @@ namespace MechanicHelper.Migrations
 
             modelBuilder.Entity("MechanicHelper.Models.Car", b =>
                 {
-                    b.Property<int>("CarId")
+                    b.Property<Guid>("CarId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Built")
                         .HasColumnType("datetime2");
@@ -45,12 +44,37 @@ namespace MechanicHelper.Migrations
                     b.ToTable("Cars");
                 });
 
+            modelBuilder.Entity("MechanicHelper.Models.Problem", b =>
+                {
+                    b.Property<Guid>("ProblemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("AddedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProblemOnId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProblemId");
+
+                    b.HasIndex("ProblemOnId");
+
+                    b.ToTable("Problem");
+                });
+
             modelBuilder.Entity("MechanicHelper.Models.RepairService", b =>
                 {
-                    b.Property<int>("RepairServiceId")
+                    b.Property<Guid>("RepairServiceId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfRepair")
                         .HasColumnType("datetime2");
@@ -62,8 +86,8 @@ namespace MechanicHelper.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("ServicedOnId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ServicedOnId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -74,6 +98,17 @@ namespace MechanicHelper.Migrations
                     b.HasIndex("ServicedOnId");
 
                     b.ToTable("RepairServices");
+                });
+
+            modelBuilder.Entity("MechanicHelper.Models.Problem", b =>
+                {
+                    b.HasOne("MechanicHelper.Models.Car", "ProblemOn")
+                        .WithMany("Problems")
+                        .HasForeignKey("ProblemOnId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProblemOn");
                 });
 
             modelBuilder.Entity("MechanicHelper.Models.RepairService", b =>
@@ -89,6 +124,8 @@ namespace MechanicHelper.Migrations
 
             modelBuilder.Entity("MechanicHelper.Models.Car", b =>
                 {
+                    b.Navigation("Problems");
+
                     b.Navigation("Repairs");
                 });
 #pragma warning restore 612, 618
