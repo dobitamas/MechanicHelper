@@ -1,5 +1,4 @@
-﻿using MechanicHelper.Areas.Identity.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,25 +10,25 @@ namespace MechanicHelper.Models
     public class RepairService
     {
         [Key]
-        private int RepairServiceId { get; set; }
+        public string RepairServiceId { get; set; }
 
         [Required]
-        [Column(TypeName = "varchar(255)")]
-        private string Title { get; set; }
+        public string Title { get; set; }
 
         [Required]
-        [Column(TypeName = "varchar(255)")]
-        private string Description { get; set; }
+        public string Description { get; set; }
 
         [Required]
-        private int Price { get; set; }
+        public DateTime DateOfRepair { get; set; }
 
         [Required]
-        private bool IsDone { get; set; } = false;
+        public int Price { get; set; }
 
         [Required]
-        private int ServicedById { get; set; }
+        [ForeignKey("ServicedOn")]
+        public string ServicedOnId { get; set; }
 
-        private MechanicUser ServicedBy { get; set; }
+        [Required]
+        public Car ServicedOn { get; set; }
     }
 }
