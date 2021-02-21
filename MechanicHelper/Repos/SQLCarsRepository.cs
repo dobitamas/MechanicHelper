@@ -22,7 +22,7 @@ namespace MechanicHelper.Repos
             return car;
         }
 
-        public Car Delete(string id)
+        public Car Delete(Guid id)
         {
             Car car = context.Cars.Find(id);
 
@@ -37,10 +37,10 @@ namespace MechanicHelper.Repos
 
         public IQueryable<Car> GetAllCars()
         {
-            return context.Cars;
+            return context.Cars.;
         }
 
-        public Car GetCar(string id)
+        public Car GetCar(Guid id)
         {
             return context.Cars.Find(id);
         }

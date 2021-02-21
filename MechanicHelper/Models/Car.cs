@@ -10,8 +10,7 @@ namespace MechanicHelper.Models
     public class Car
     {
         [Key]
-        [Column(TypeName = "uniqueidentifier")]
-        public int CarId { get; set; }
+        public Guid CarId { get; set; }
 
         [Required]
         public string Make { get; set; }
@@ -27,7 +26,7 @@ namespace MechanicHelper.Models
 
         public ICollection<RepairService> Repairs { get; set; }
 
-        public ICollection<string> Problems { get; set; }
+        public ICollection<Problem> Problems { get; set; }
 
         public Car()
         {

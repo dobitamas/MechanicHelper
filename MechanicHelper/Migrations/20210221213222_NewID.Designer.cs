@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MechanicHelper.Migrations
 {
     [DbContext(typeof(MechanicDbContext))]
-    [Migration("20210221162647_AddedServices")]
-    partial class AddedServices
+    [Migration("20210221213222_NewID")]
+    partial class NewID
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,9 @@ namespace MechanicHelper.Migrations
 
             modelBuilder.Entity("MechanicHelper.Models.Car", b =>
                 {
-                    b.Property<string>("CarId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CarId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Built")
                         .HasColumnType("datetime2");
@@ -45,10 +46,37 @@ namespace MechanicHelper.Migrations
                     b.ToTable("Cars");
                 });
 
+            modelBuilder.Entity("MechanicHelper.Models.Problem", b =>
+                {
+                    b.Property<Guid>("ProblemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("AddedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProblemOnId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProblemId");
+
+                    b.HasIndex("ProblemOnId");
+
+                    b.ToTable("Problem");
+                });
+
             modelBuilder.Entity("MechanicHelper.Models.RepairService", b =>
                 {
-                    b.Property<string>("RepairServiceId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RepairServiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfRepair")
                         .HasColumnType("datetime2");
@@ -60,9 +88,8 @@ namespace MechanicHelper.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<string>("ServicedOnId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ServicedOnId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -73,6 +100,17 @@ namespace MechanicHelper.Migrations
                     b.HasIndex("ServicedOnId");
 
                     b.ToTable("RepairServices");
+                });
+
+            modelBuilder.Entity("MechanicHelper.Models.Problem", b =>
+                {
+                    b.HasOne("MechanicHelper.Models.Car", "ProblemOn")
+                        .WithMany("Problems")
+                        .HasForeignKey("ProblemOnId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProblemOn");
                 });
 
             modelBuilder.Entity("MechanicHelper.Models.RepairService", b =>
@@ -88,6 +126,8 @@ namespace MechanicHelper.Migrations
 
             modelBuilder.Entity("MechanicHelper.Models.Car", b =>
                 {
+                    b.Navigation("Problems");
+
                     b.Navigation("Repairs");
                 });
 #pragma warning restore 612, 618
