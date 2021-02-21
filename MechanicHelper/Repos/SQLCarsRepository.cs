@@ -24,22 +24,33 @@ namespace MechanicHelper.Repos
 
         public Car Delete(int id)
         {
-            throw new NotImplementedException();
+            Car car = context.Cars.Find(id);
+
+            if (car != null)
+            {
+                context.Cars.Remove(car);
+                context.SaveChanges();
+            }
+
+            return car;
         }
 
         public IEnumerable<Car> GetAllCars()
         {
-            throw new NotImplementedException();
+            return context.Cars;
         }
 
-        public ICarsRepository GetCar(int id)
+        public Car GetCar(int id)
         {
-            throw new NotImplementedException();
+            return context.Cars.Find(id);
         }
 
-        public Car Update(Car car)
+        public Car Update(Car carChanges)
         {
-            throw new NotImplementedException();
+            var car = context.Cars.Attach(carChanges);
+            car.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return carChanges;
         }
     }
 }
