@@ -21,8 +21,10 @@ namespace MechanicHelper.Migrations
 
             modelBuilder.Entity("MechanicHelper.Models.Car", b =>
                 {
-                    b.Property<string>("CarId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CarId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Built")
                         .HasColumnType("datetime2");
@@ -45,8 +47,10 @@ namespace MechanicHelper.Migrations
 
             modelBuilder.Entity("MechanicHelper.Models.RepairService", b =>
                 {
-                    b.Property<string>("RepairServiceId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RepairServiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateOfRepair")
                         .HasColumnType("datetime2");
@@ -58,9 +62,8 @@ namespace MechanicHelper.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<string>("ServicedOnId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ServicedOnId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()

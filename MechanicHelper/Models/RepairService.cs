@@ -10,7 +10,8 @@ namespace MechanicHelper.Models
     public class RepairService
     {
         [Key]
-        public string RepairServiceId { get; set; }
+        [Column(TypeName = "uniqueidentifier")]
+        public int RepairServiceId { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -26,9 +27,14 @@ namespace MechanicHelper.Models
 
         [Required]
         [ForeignKey("ServicedOn")]
-        public string ServicedOnId { get; set; }
+        [Column(TypeName = "uniqueidentifier")]
+        public int ServicedOnId { get; set; }
 
         [Required]
         public Car ServicedOn { get; set; }
+
+        public RepairService()
+        {
+        }
     }
 }
