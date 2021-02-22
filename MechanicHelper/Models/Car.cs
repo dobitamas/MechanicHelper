@@ -9,8 +9,19 @@ namespace MechanicHelper.Models
 {
     public class Car
     {
+        public Car(int carId, string make, string model, DateTime built, int distance)
+        {
+            CarId = carId;
+            Make = make;
+            Model = model;
+            Built = built;
+            Distance = distance;
+            Repairs = new List<RepairService>();
+            Problems = new List<Problem>();
+        }
+
         [Key]
-        public Guid CarId { get; set; }
+        public int CarId { get; set; }
 
         [Required]
         public string Make { get; set; }
@@ -24,12 +35,8 @@ namespace MechanicHelper.Models
         [Required]
         public int Distance { get; set; }
 
-        public ICollection<RepairService> Repairs { get; set; }
+        public List<RepairService> Repairs { get; set; } = new List<RepairService>();
 
-        public ICollection<Problem> Problems { get; set; }
-
-        public Car()
-        {
-        }
+        public List<Problem> Problems { get; set; } = new List<Problem>();
     }
 }

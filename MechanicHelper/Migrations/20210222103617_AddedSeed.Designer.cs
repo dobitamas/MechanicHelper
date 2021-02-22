@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MechanicHelper.Migrations
 {
     [DbContext(typeof(MechanicDbContext))]
-    [Migration("20210221213222_NewID")]
-    partial class NewID
+    [Migration("20210222103617_AddedSeed")]
+    partial class AddedSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,10 @@ namespace MechanicHelper.Migrations
 
             modelBuilder.Entity("MechanicHelper.Models.Car", b =>
                 {
-                    b.Property<Guid>("CarId")
+                    b.Property<int>("CarId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Built")
                         .HasColumnType("datetime2");
@@ -44,13 +45,40 @@ namespace MechanicHelper.Migrations
                     b.HasKey("CarId");
 
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            CarId = -1,
+                            Built = new DateTime(2021, 2, 22, 11, 36, 17, 316, DateTimeKind.Local).AddTicks(1298),
+                            Distance = 20000,
+                            Make = "Alfa",
+                            Model = "Romeo"
+                        },
+                        new
+                        {
+                            CarId = -2,
+                            Built = new DateTime(2021, 2, 22, 11, 36, 17, 318, DateTimeKind.Local).AddTicks(8851),
+                            Distance = 20000,
+                            Make = "Alfa",
+                            Model = "Romeo"
+                        },
+                        new
+                        {
+                            CarId = -3,
+                            Built = new DateTime(2021, 2, 22, 11, 36, 17, 318, DateTimeKind.Local).AddTicks(8882),
+                            Distance = 20000,
+                            Make = "Alfa",
+                            Model = "Romeo"
+                        });
                 });
 
             modelBuilder.Entity("MechanicHelper.Models.Problem", b =>
                 {
-                    b.Property<Guid>("ProblemId")
+                    b.Property<int>("ProblemId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -62,21 +90,22 @@ namespace MechanicHelper.Migrations
                     b.Property<bool>("IsDone")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ProblemOnId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProblemOnId")
+                        .HasColumnType("int");
 
                     b.HasKey("ProblemId");
 
                     b.HasIndex("ProblemOnId");
 
-                    b.ToTable("Problem");
+                    b.ToTable("Problems");
                 });
 
             modelBuilder.Entity("MechanicHelper.Models.RepairService", b =>
                 {
-                    b.Property<Guid>("RepairServiceId")
+                    b.Property<int>("RepairServiceId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateOfRepair")
                         .HasColumnType("datetime2");
@@ -88,8 +117,8 @@ namespace MechanicHelper.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ServicedOnId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ServicedOnId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
