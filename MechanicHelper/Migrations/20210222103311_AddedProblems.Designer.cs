@@ -4,14 +4,16 @@ using MechanicHelper.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MechanicHelper.Migrations
 {
     [DbContext(typeof(MechanicDbContext))]
-    partial class MechanicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210222103311_AddedProblems")]
+    partial class AddedProblems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,32 +45,6 @@ namespace MechanicHelper.Migrations
                     b.HasKey("CarId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            CarId = -1,
-                            Built = new DateTime(2021, 2, 22, 11, 36, 17, 316, DateTimeKind.Local).AddTicks(1298),
-                            Distance = 20000,
-                            Make = "Alfa",
-                            Model = "Romeo"
-                        },
-                        new
-                        {
-                            CarId = -2,
-                            Built = new DateTime(2021, 2, 22, 11, 36, 17, 318, DateTimeKind.Local).AddTicks(8851),
-                            Distance = 20000,
-                            Make = "Alfa",
-                            Model = "Romeo"
-                        },
-                        new
-                        {
-                            CarId = -3,
-                            Built = new DateTime(2021, 2, 22, 11, 36, 17, 318, DateTimeKind.Local).AddTicks(8882),
-                            Distance = 20000,
-                            Make = "Alfa",
-                            Model = "Romeo"
-                        });
                 });
 
             modelBuilder.Entity("MechanicHelper.Models.Problem", b =>

@@ -10,7 +10,7 @@ namespace MechanicHelper.Models
     public class Problem
     {
         [Key]
-        public Guid ProblemId { get; set; }
+        public int ProblemId { get; set; }
 
         [Required]
         public DateTime AddedOn { get; set; }
@@ -23,7 +23,7 @@ namespace MechanicHelper.Models
 
         [Required]
         [ForeignKey("ProblemOn")]
-        public Guid ProblemOnId { get; set; }
+        public int ProblemOnId { get; set; }
 
         [Required]
         public Car ProblemOn { get; set; }

@@ -10,7 +10,7 @@ namespace MechanicHelper.Models
     public class RepairService
     {
         [Key]
-        public Guid RepairServiceId { get; set; }
+        public int RepairServiceId { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -26,13 +26,9 @@ namespace MechanicHelper.Models
 
         [Required]
         [ForeignKey("ServicedOn")]
-        public Guid ServicedOnId { get; set; }
+        public int ServicedOnId { get; set; }
 
         [Required]
         public Car ServicedOn { get; set; }
-
-        public RepairService()
-        {
-        }
     }
 }

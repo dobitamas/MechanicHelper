@@ -1,24 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<MechanicHelper.Models.Car>
 
+@{
+    ViewData["Title"] = "Main Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Check out these cars!</h1>
-    <div class="row">
-        @model IQueryable<Car>
+<h1>Look at this cars</h1>
+<p>Select a car for repair</p>
+
+<div class="container m-3 border border-primary">
+    <div class="row m-3">
         @foreach (var car in Model)
         {
             <div class="col-4">
+                <a asp-action=""
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" style="width: 18rem;" src="@car.Model" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-title">@car.Make</p>
-                        <p class="card-text">@car.Model</p>
-                        <p class="card-text">@car.Built</p>
-                        <p class="card-text">@car.Model</p>
-                        <p class="card-text">Number of repairs: @car.Repairs.Count()</p>
-                        <p class="card-text">Number of problems: @car.Problems.Count()</p>
+                        <p class="card-title">Make: @car.Make @car.Model</p>
+                        <p class="card-text">Built: @car.Built</p>
+                        <p class="card-text">Distance: @car.Distance</p>
+                        <p class="card-text">Num of problems: @car.Problems.Count</p>
                     </div>
                 </div>
             </div>

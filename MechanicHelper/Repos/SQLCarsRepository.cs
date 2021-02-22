@@ -37,7 +37,10 @@ namespace MechanicHelper.Repos
 
         public IQueryable<Car> GetAllCars()
         {
-            return context.Cars.;
+            IQueryable<Car> Cars = context.Cars;
+
+            Console.WriteLine(Cars.Count());
+            return context.Cars;
         }
 
         public Car GetCar(Guid id)
